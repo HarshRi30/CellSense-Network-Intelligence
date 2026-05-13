@@ -1,0 +1,10 @@
+404.csv
+405.csv
+trai_jio.csv
+trai_airtel.csv
+trai_vi.csv
+data/
+models/speed_model.pkl
+__pycache__/
+*.pyc
+.env
