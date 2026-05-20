@@ -1,7 +1,10 @@
 import joblib
 import numpy as np
+import os
 
-MODEL_PATH = r"C:\Users\Rishi Agrawal\Documents\CellSense\models\speed_model.pkl"
+BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "speed_model.pkl")
+
 speed_model = joblib.load(MODEL_PATH)
 
 TECH_MAP = {'GSM': 0, 'UMTS': 1, 'LTE': 2, 'NR': 3}
