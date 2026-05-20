@@ -10,14 +10,11 @@ import math
 import psycopg2
 import psycopg2.extras
 
-# ─── DB CONFIG ────────────────────────────────────────────
-DB_CONFIG = {
-    "host":     "localhost",
-    "port":     5432,
-    "database": "cellsense",
-    "user":     "postgres",
-    "password": "7020"
-}
+import os
+
+def get_db_conn():
+    db_url = os.getenv("DB_URL", "postgresql://postgres:7020@localhost:5432/cellsense")
+    return psycopg2.connect(db_url)
 
 # ─── CONSTANTS ────────────────────────────────────────────
 # Typical transmit power per radio type (dBm)
@@ -90,7 +87,7 @@ def get_best_network(lat, lng, radius_m=5000, indoor=False):
     Given lat/lng, returns ranked operators with signal estimates.
     indoor: adds 15dB penetration loss for indoor scenario
     """
-    conn = psycopg2.connect(**DB_CONFIG)
+    conn = get_db_conn()
     cur  = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     # PostGIS radius query — get all active towers nearby
