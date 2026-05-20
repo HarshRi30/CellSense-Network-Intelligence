@@ -3,12 +3,12 @@ import axios from 'axios'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import './CoverageGap.css'
 
-const API = 'http://127.0.0.1:8000'
+const API = 'https://cellsense-network-intelligence.onrender.com'
 
 export default function CoverageGap() {
-  const [data,    setData]    = useState([])
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
-  const [sort,    setSort]    = useState('gap_rank')
+  const [sort, setSort] = useState('gap_rank')
 
   useEffect(() => {
     axios.get(`${API}/api/coverage-gap`)
@@ -17,9 +17,9 @@ export default function CoverageGap() {
   }, [])
 
   const sorted = [...data].sort((a, b) => {
-    if (sort === 'gap_rank')     return a.gap_rank - b.gap_rank
+    if (sort === 'gap_rank') return a.gap_rank - b.gap_rank
     if (sort === 'total_towers') return b.total_towers - a.total_towers
-    if (sort === 'towers_5g')    return b.towers_5g - a.towers_5g
+    if (sort === 'towers_5g') return b.towers_5g - a.towers_5g
     return 0
   })
 
@@ -53,7 +53,7 @@ export default function CoverageGap() {
               labelStyle={{ color: '#00d4ff' }}
               itemStyle={{ color: '#e2eaf5' }}
             />
-            <Bar dataKey="sqkm_per_tower" radius={[3,3,0,0]}>
+            <Bar dataKey="sqkm_per_tower" radius={[3, 3, 0, 0]}>
               {top10gap.map((_, i) => (
                 <Cell key={i} fill={i === 0 ? '#ff4444' : i < 3 ? '#ff8800' : '#00d4ff'} />
               ))}

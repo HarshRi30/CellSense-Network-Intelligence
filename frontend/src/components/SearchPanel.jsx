@@ -2,10 +2,9 @@ import { useState } from 'react'
 import axios from 'axios'
 import './SearchPanel.css'
 
-const API = 'http://127.0.0.1:8000'
-
+const API = 'https://cellsense-network-intelligence.onrender.com'
 export default function SearchPanel({ setResults, setLoading, setMarker }) {
-  const [query,  setQuery]  = useState('')
+  const [query, setQuery] = useState('')
   const [indoor, setIndoor] = useState(false)
   const [radius, setRadius] = useState(5000)
 
@@ -25,7 +24,7 @@ export default function SearchPanel({ setResults, setLoading, setMarker }) {
     try {
       const { lat, lng } = await geocode(query)
       setMarker({ lat, lng })
-      const res = await axios.post(`${API}/api/best-network`, { lat, lng, radius_m: radius, indoor })
+      const res = await axios.post(`${API}/api/best-network`, { lat, lng, radius_m: radius, indoor }, { timeout: 60000 })
       setResults(res.data)
     } catch (e) {
       alert(e.message || 'Error fetching data')

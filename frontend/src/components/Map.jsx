@@ -5,7 +5,7 @@ import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
 import './Map.css'
 
-const API = 'http://127.0.0.1:8000'
+const API = 'https://cellsense-network-intelligence.onrender.com'
 
 // Fix leaflet default icon
 delete L.Icon.Default.prototype._getIconUrl
@@ -72,7 +72,7 @@ export default function Map({ marker, setMarker, setResults, setLoading }) {
       {marker && (
         <Marker position={[marker.lat, marker.lng]} icon={pinIcon}>
           <Popup>
-            <span style={{fontFamily:'monospace', fontSize:'12px'}}>
+            <span style={{ fontFamily: 'monospace', fontSize: '12px' }}>
               {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
             </span>
           </Popup>
